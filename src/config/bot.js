@@ -488,16 +488,23 @@ export function validateConfig(config) {
   }
 
   if (process.env.NODE_ENV === 'production') {
+  // Jika tidak ada URL database, baru cek variabel satu per satu
+  if (!process.env.POSTGRES_URL && !process.env.DATABASE_URL) {
+
     if (!process.env.POSTGRES_HOST) {
       errors.push("PostgreSQL host is required in production (POSTGRES_HOST environment variable)");
     }
+
     if (!process.env.POSTGRES_USER) {
       errors.push("PostgreSQL user is required in production (POSTGRES_USER environment variable)");
     }
+
     if (!process.env.POSTGRES_PASSWORD) {
       errors.push("PostgreSQL password is required in production (POSTGRES_PASSWORD environment variable)");
     }
+
   }
+}
 
   return errors;
 }
