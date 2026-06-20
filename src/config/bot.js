@@ -503,11 +503,12 @@ export function validateConfig(config) {
 }
 
 const configErrors = validateConfig(botConfig);
+
 if (configErrors.length > 0) {
-  logger.error("Bot configuration errors:", configErrors.join("\n"));
-  if (process.env.NODE_ENV === "production") {
-    process.exit(1);
-  }
+  console.error("CONFIG ERRORS:");
+  console.error(configErrors);
+
+  process.exit(1);
 }
 
 export const BotConfig = botConfig;
